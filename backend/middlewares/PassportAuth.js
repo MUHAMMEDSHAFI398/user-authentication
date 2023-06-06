@@ -10,14 +10,12 @@ opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = process.env.USER_SECRET;
 
 passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log(jwt_payload);
     user.findOne({ email: jwt_payload.email })
         .then((user) => {
             if (user) {
                 return done(null, user);
             } else {
                 return done(null, false);
-                // or you could create a new account
             }
         })
         .catch((err) => {

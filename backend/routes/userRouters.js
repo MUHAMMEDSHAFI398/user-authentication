@@ -1,23 +1,17 @@
 const express = require('express');
 const userRouter = express();
-const officeController = require("../controllers/userController")
+const userController = require("../controllers/userController")
 const passport = require('passport')
 require('../middlewares/PassportAuth')
 userRouter.use(passport.initialize())
 
-userRouter.post('/register', officeController.register)
+userRouter.post('/register', userController.register)
 
-userRouter.post('/login', officeController.login)
+userRouter.post('/login', userController.login)
 
-userRouter.get('/protected',passport.authenticate('jwt',{session:false}),(req,res)=>{
-    return res.status(200).send({
-        success:true,
-        user:{
-            id:req.user._id,
-            email:req.user.email
-        }
-    })
-})
+userRouter.get('/protected',passport.authenticate('jwt',{session:false}),userController.authenticate)
+
+userRouter.post('/googleLogin', userController.googleLogin)
 
 
 

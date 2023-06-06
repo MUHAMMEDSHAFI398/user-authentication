@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/user", userRouters);
    
-// app.use(errorHandler);
+app.use(errorHandler);
 
 app.listen(process.env.PORTNO, () => {
-    console.log("server started listening to port 5000");
+    console.log("server started listening to port 8080");
 });
