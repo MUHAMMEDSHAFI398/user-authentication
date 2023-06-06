@@ -15,3 +15,8 @@ export const googleLoginAPI = (data) => {
 export const authenticateAPI = (token) => {
     return axios.get('/protected', {headers:{Authorization:token}})
 }
+
+export const userDataAPI = (data) => {
+    const token=localStorage.getItem("userToken")
+    return axios.get(`/user-data/${data}`, {headers:{Authorization:token}})
+}

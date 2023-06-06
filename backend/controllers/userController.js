@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const cities = require("../models/cityModel");
 dotenv.config();
+const { ObjectId } = require('mongodb');
 
 module.exports = {
   register: async (req, res, next) => {
@@ -127,9 +128,9 @@ module.exports = {
         const userData = user({
           name: req.body.name,
           email: req.body.email,
+          city:new ObjectId()
         });
-        userData
-          .save()
+        userData.save()
           .then(() => {
             const payload = {
               email: data.email,
@@ -182,6 +183,47 @@ module.exports = {
     } catch (err) {
       next(err);
     }
+  },
+  getUserData:async (req,res,next)=>{
+     try{
+       const userDetails = await user.findOne({email:req.params.id})
+       const userData = await user.aggregate([
+        {
+            $match:{
+                email:req.params.id
+            }
+        },
+        {
+            $lookup:{
+                from:"cities",
+                localField:"city",
+                foreignField:"_id",
+                as:"city"
+        
+            }
+        },
+        {
+            $unwind:"$city"
+        },
+        {
+            $project:{
+                _id:0,
+                name:1,
+                email:1,
+                city:1,
+                
+            }
+        }
+       ])
+       res.json({
+        status:true,
+        name:userDetails.name,
+        email:userDetails.email,
+        city:userData[0]?.city?.cityName ? userData[0]?.city?.cityName : "Not added"
+       })
+     }catch(err){
+       next(err)
+     } 
   },
   authenticate: (req, res, next) => {
     try {

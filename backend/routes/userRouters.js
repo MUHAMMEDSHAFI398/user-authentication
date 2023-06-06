@@ -13,6 +13,11 @@ userRouter.get('/protected',passport.authenticate('jwt',{session:false}),userCon
 
 userRouter.post('/googleLogin', userController.googleLogin)
 
+userRouter.post('/googleLogin', userController.googleLogin)
+
+userRouter.get('/user-data/:id',passport.authenticate('jwt',{session:false}),userController.getUserData)
+
+
 
 
 module.exports=userRouter
