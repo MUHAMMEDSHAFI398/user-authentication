@@ -34,16 +34,10 @@ function Home() {
       });
   }, [userEmail]);
   const details = useSelector((state) => state.userData);
-  console.log(details);
 
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   localStorage.removeItem("userToken");
-  //   navigate("/");
-  // };
   return (
     <div>
-      <NavBar/>
+      <NavBar />
       <div className="flex justify-center ">
         <p className="font-bold text-[50px] mt-5">
           Welcome {details?.userData?.name}

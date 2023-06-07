@@ -1,18 +1,17 @@
-import React,{useState} from 'react'
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 function NavBar() {
-    const navigate = useNavigate();
-    const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const toggleMobileMenu = () => {
-        setMobileMenuOpen(!isMobileMenuOpen);
-      };
-    const handleClick = (e) => {
-        e.preventDefault();
-        localStorage.removeItem("userToken");
-        navigate("/");
-      };
+  const navigate = useNavigate();
+  const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!isMobileMenuOpen);
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("userToken");
+    navigate("/");
+  };
   return (
     <div>
       <nav className="bg-gray-800">
@@ -42,7 +41,6 @@ function NavBar() {
                   className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium cursor-pointer"
                 >
                   Logout
-                  
                 </p>
               </div>
             </div>
@@ -81,7 +79,7 @@ function NavBar() {
                 Home
               </p>
               <p
-              onClick={() => navigate("/file-process")}
+                onClick={() => navigate("/file-process")}
                 className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-pointer"
               >
                 Fileprocessing
@@ -97,7 +95,7 @@ function NavBar() {
         )}
       </nav>
     </div>
-  )
+  );
 }
 
-export default NavBar
+export default NavBar;

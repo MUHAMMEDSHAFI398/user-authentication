@@ -5,6 +5,7 @@ const fileController = require('../controllers/fileController')
 const uploadfiles = require('../middlewares/Cloudinary')
 const passport = require('passport')
 require('../middlewares/PassportAuth')
+
 userRouter.use(passport.initialize())
 
 userRouter.post('/register', userController.register)
@@ -22,12 +23,6 @@ userRouter.get('/user-data/:id',passport.authenticate('jwt',{session:false}),use
 userRouter.get('/user-data/:id',passport.authenticate('jwt',{session:false}),userController.getUserData)
 
 userRouter.post('/file-process',passport.authenticate('jwt',{session:false}),uploadfiles,fileController.fileProcessing)
-
-
-
-
-
-
 
 
 module.exports=userRouter

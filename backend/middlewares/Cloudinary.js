@@ -16,7 +16,6 @@ const storage = new CloudinaryStorage({
 
 const multer = require("multer");
 const fileFilter = (req, file, cb) => {
-  // Add your file filter logic here if needed
   return cb(null, true);
 };
 

@@ -37,9 +37,9 @@ function Signup() {
           }
         })
         .catch((err) => {
-          if(err.response.status === 409){
-            setErrors({email:"Email already exist"})
-          }else{
+          if (err.response.status === 409) {
+            setErrors({ email: "Email already exist" });
+          } else {
             navigate("/error");
           }
         });

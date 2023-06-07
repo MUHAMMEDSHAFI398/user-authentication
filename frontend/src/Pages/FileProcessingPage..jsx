@@ -1,12 +1,12 @@
-import React from 'react'
-import FileProcess from '../Components/FileProcess'
+import React from "react";
+import FileProcess from "../Components/FileProcess";
 
 function FileProcessingPage() {
   return (
     <div>
-      <FileProcess/>
+      <FileProcess />
     </div>
-  )
+  );
 }
 
-export default FileProcessingPage
+export default FileProcessingPage;

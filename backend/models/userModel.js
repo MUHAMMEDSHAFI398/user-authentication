@@ -13,16 +13,15 @@ const userSchema = new Schema(
     },
     city: {
       type: mongoose.SchemaTypes.ObjectId,
-      ref:'cities'
+      ref: "cities",
     },
-    password:{
-        type:String,
-        trim:true
-    }
-
+    password: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );
 
 const user = mongoose.model("user", userSchema);
-module.exports = user
+module.exports = user;

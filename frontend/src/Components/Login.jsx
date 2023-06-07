@@ -1,4 +1,4 @@
-import React, { useState,useRef,useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "../style.css";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
@@ -16,21 +16,23 @@ function Login() {
     password: "",
   });
 
-  useEffect(() => { 
+  useEffect(() => {
     /* global google */
     const handleGoogle = async (response) => {
       const token = response.credential;
       const userObj = jwt_decode(token);
-      googleLoginAPI(userObj).then((response) => {
-        if (response.data.status) {
-          const jwtToken = response.data.token;
-          localStorage.setItem("userToken", jwtToken);
-          message.success("Successfully logged in");
-          navigate("/home");
-        } else {
-          navigate("/error");
-        }
-        }).catch((err) => {
+      googleLoginAPI(userObj)
+        .then((response) => {
+          if (response.data.status) {
+            const jwtToken = response.data.token;
+            localStorage.setItem("userToken", jwtToken);
+            message.success("Successfully logged in");
+            navigate("/home");
+          } else {
+            navigate("/error");
+          }
+        })
+        .catch((err) => {
           navigate("/error");
         });
     };
@@ -72,7 +74,8 @@ function Login() {
           } else {
             navigate("/error");
           }
-        }).catch((err) => {
+        })
+        .catch((err) => {
           navigate("/error");
         });
     }
@@ -80,8 +83,7 @@ function Login() {
   return (
     <div className="flex justify-center">
       <div className="border-2 border-black w-[334px] flex justify-center mt-[60px]">
-          <div>
-          
+        <div>
           <div className="flex justify-center underline">
             <p className="text-[25px] mb-[40px]">Login to your account</p>
           </div>
@@ -133,7 +135,7 @@ function Login() {
             </button>
           </div>
           <div className="flex justify-center mb-3">
-          <p>or</p>
+            <p>or</p>
           </div>
           <div className="flex justify-center mb-3">
             <button ref={signBtn}></button>
@@ -147,7 +149,7 @@ function Login() {
               Register
             </p>
           </div>
-          </div>
+        </div>
       </div>
     </div>
   );
