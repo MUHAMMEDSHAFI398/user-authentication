@@ -12,6 +12,13 @@ export const googleLoginAPI = (data) => {
     return axios.post('/googleLogin', data)
 }
 
+export const fileProcessAPI = (data) => {
+    const token=localStorage.getItem("userToken")
+    return axios.post('/file-process', data,
+     { "Content-Type": "multipart/form-data",headers:{Authorization:token}})
+}
+
+
 export const authenticateAPI = (token) => {
     return axios.get('/protected', {headers:{Authorization:token}})
 }

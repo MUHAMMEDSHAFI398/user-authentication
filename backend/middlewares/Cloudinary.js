@@ -1,0 +1,32 @@
+const cloudinary = require("cloudinary").v2;
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "fileuploads",
+  },
+});
+
+const multer = require("multer");
+const fileFilter = (req, file, cb) => {
+  // Add your file filter logic here if needed
+  return cb(null, true);
+};
+
+const upload = multer({ storage, fileFilter }).array("files", 10);
+
+module.exports = (req, res, next) => {
+  upload(req, res, (err) => {
+    if (err) {
+      return res.json({ error: "There is an error" });
+    }
+    return next();
+  });
+};
