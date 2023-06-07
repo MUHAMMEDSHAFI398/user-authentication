@@ -190,7 +190,6 @@ module.exports = {
       const userDetails = await user
         .findOne({ email: req.params.id })
         .populate("city");
-      console.log(userDetails);
       const userData = await user.aggregate([
         {
           $match: {
